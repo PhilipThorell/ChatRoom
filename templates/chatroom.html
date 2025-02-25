@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../static/chatroomStyle.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script>
 </head>
 <body>
     
@@ -14,7 +15,7 @@
         </div>
         <div class="showBox">
             <div class="messageBox">
-                <form action="">
+                <form id="messageForm">
                     <input type="text" name="message" id="message" placeholder="Send message..">
                     <button id="messageBtn" type="submit"></button>
                 </form>
@@ -22,6 +23,8 @@
             
         </div>
     </div>
+
+    <script src="../static/chat.js"></script>
 
 </body>
 </html>

@@ -14,6 +14,30 @@
     "regen": {
       "password": "123",
       "friends": []
+    },
+    "qwerty": {
+      "password": "123qwerty",
+      "friends": []
+    },
+    "hej": {
+      "password": "123",
+      "friends": []
+    },
+    "heej": {
+      "password": "123",
+      "friends": []
+    },
+    "geg": {
+      "password": "erge",
+      "friends": []
+    },
+    "wada": {
+      "password": "awdawd",
+      "friends": []
+    },
+    "dwad": {
+      "password": "awdawd",
+      "friends": []
     }
   },
   "regenslayer": {

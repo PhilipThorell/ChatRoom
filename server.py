@@ -72,6 +72,7 @@ def handle_friend(data):
 
 @socketio.on("message")
 def handle_message(data):
+    print(data)
     database["chatrooms"] = {"users": [data.user1, data.user2], "messages": []}
     socketio.emit("sent_message", database["chatrooms"]["messages"])
 
