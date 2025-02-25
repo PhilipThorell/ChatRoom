@@ -1,0 +1,118 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    background-color: gray;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    
+}
+
+.friendList {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    background-color: #242628;
+    width: 350px;
+    height: 100%;
+    text-align: center;
+}
+
+.showBox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #2b2d31;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.messageBox {
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+}
+
+input {
+    border: 1px solid #1d1f21;
+    background-color: #34373b;
+    margin-left: 10px;
+    border-radius: 12px;
+    width: 78%;
+    height: 45px;
+    margin-bottom: 10px;
+    text-indent: 10px;
+}
+
+#friendBtn {
+    margin-top: 10%;
+    height: 40px;
+    background-color: #349376;
+    color: white;
+    cursor: pointer;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    text-align: center;
+}
+
+#friendBtn:hover {
+    background-color: #2a7861;
+    box-shadow: 0 0 5px #349376; /* Blå glow-effekt */
+}
+
+#friendBtn:active {
+    background-color: #349376;
+}
+
+#messageBtn {
+    background-image: url('../Images/send.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    
+}
+
+#messageBtn:hover {
+    opacity: 65%;
+}
+
+#messageBtn:active {
+    opacity: 100%;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+}
+
+input {
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+input:hover {
+    box-shadow: 0 0 5px #349376; 
+}
+
+input:focus {
+    
+    outline: none;
+    box-shadow: 0 0 5px #349376;
+}
