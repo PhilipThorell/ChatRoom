@@ -17,13 +17,19 @@ html, body {
 }
 
 .friendList {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
     background-color: #242628;
     width: 350px;
     height: 100%;
     text-align: center;
+}
+
+.friendBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 60px;
+    gap: 5px;
 }
 
 .showBox {
@@ -44,7 +50,7 @@ html, body {
     bottom: 0;
 }
 
-input {
+#message {
     border: 1px solid #1d1f21;
     background-color: #34373b;
     margin-left: 10px;
@@ -56,15 +62,13 @@ input {
 }
 
 #friendBtn {
-    margin-top: 10%;
-    height: 40px;
+    padding: 9px 10px;
     background-color: #349376;
     color: white;
     cursor: pointer;
-    padding: 10px 25px;
     border: none;
     border-radius: 10px;
-    font-size: large;
+    font-size: medium;
     text-align: center;
 }
 
@@ -102,18 +106,38 @@ form {
     display: flex;
     gap: 10px;
 }
-
-input {
-    transition: box-shadow 0.2s ease-in-out;
+#message {
+   transition: box-shadow 0.2s ease-in-out;
     color: #d5d5d5;
 }
 
-input:hover {
+#message:hover {
     box-shadow: 0 0 5px #349376; 
 }
 
-input:focus {
-    
+#message:focus {
+    outline: none;
+    box-shadow: 0 0 5px #349376;
+}
+
+#searchbar {
+    color: #d5d5d5;
+    transition: box-shadow 0.2s ease-in-out;
+    border: 1px solid #1d1f21;
+    background-color: #34373b;
+    border-radius: 12px;
+    width: 150px;
+    margin-top: auto;
+    height: 35px;
+    text-indent: 10px;
+    margin-bottom: auto;
+}
+
+#searchbar:hover {
+    box-shadow: 0 0 5px #349376;
+}
+
+#searchbar:focus {
     outline: none;
     box-shadow: 0 0 5px #349376;
 }
