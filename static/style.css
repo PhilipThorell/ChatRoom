@@ -66,3 +66,8 @@ button {
         background-color: #2a7760;
     }
 
+
+
+footer {
+    flex: 1;
+}
