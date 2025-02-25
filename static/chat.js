@@ -11,20 +11,26 @@ socket.on("sent_message", function(data) {
     messages = data
 });
 
-document.getElementById("friendBtn").addEventListener("click", function () {
+document.getElementById("friendBtn").addEventListener("click", function (event) {
+    event.preventDefault();
+    const friendName = document.getElementById("searchbar").value;
 
+    if (friendName) {
+        document.getElementById("searchbar").value = "";
+        socket.emit("add_friend", {"username": username, "friend": friendName});
+    } else {
+        alert("Please enter a friends name!");
+    }
 });
 
 document.getElementById("messageBtn").addEventListener("click", function (event) {
     event.preventDefault(); // Prevent form submission
-    const messageInput = document.getElementById("message").value.trim();
+    const textMessage = document.getElementById("message").value.trim();
 
-    if (messageInput) {
-        console.log(messageInput);
+    if (textMessage) {
         document.getElementById("message").value = ""; // Clear input
+        socket.emit("message", textMessage);
     } else {
         alert("Please enter a message!");
     }
-
-    socket.emit("message", messageInput);
 });

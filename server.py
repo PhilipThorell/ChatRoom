@@ -56,24 +56,28 @@ def handle_connect():
 @app.route("/chat", methods=["GET", "POST"])
 def chat_room():
     username = session.get('username')
+    print(f"Hello {username}")
     if not username:
         return redirect(url_for("login_page"))
 
     friends = database["users"][username]["friends"]
 
-    return render_template("chatroom.html")
+    return render_template("chatroom.html",
+                           username=username,
+                           friends=friends)
 
 
 @socketio.on("add_friend")
 def handle_friend(data):
-    database["users"][data.username]["friends"].append(data.friend)
-    socketio.emit("added_friend", database["users"][data.username]["friends"])
+    database["users"][data["username"]]["friends"].append(data["friend"])
+    save_database()
+    socketio.emit("added_friend", database["users"][data["username"]]["friends"])
 
 
 @socketio.on("message")
 def handle_message(data):
-    print(data)
-    database["chatrooms"] = {"users": [data.user1, data.user2], "messages": []}
+    database["chatrooms"] = {"users": [data["user1"], data["user2"]], "messages": []}
+    save_database()
     socketio.emit("sent_message", database["chatrooms"]["messages"])
 
 

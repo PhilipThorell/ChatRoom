@@ -14,15 +14,20 @@
     "regen": {
       "password": "123",
       "friends": []
+    },
+    "dawd": {
+      "password": "adasd",
+      "friends": []
+    },
+    "philip": {
+      "password": "123",
+      "friends": [
+        "regen",
+        "regen",
+        "",
+        "hej",
+        "warwick"
+      ]
     }
-  },
-  "regenslayer": {
-    "password": "hej123"
-  },
-  "hej": {
-    "password": "hej123"
-  },
-  "regen": {
-    "password": "123"
   }
 }
