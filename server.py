@@ -17,15 +17,20 @@ def home_page():
 @socketio.on("connect")
 def handle_connect():
     print(f"Client: {request.sid} connected!")
-    clients[request.sid]["messages"] = []
+    #clients[request.sid]["messages"] = []
 
 
 @socketio.on("clientInfo")
 def handle_connect(info):
     username = info["name"]
     password = info["pass"]
-    clients[request.sid]["info"] = {"username": username,
-                                    "password": password}
+    #clients[request.sid]["info"] = {"username": username,
+    #                                "password": password}
+    if username not in clients:
+        clients[username]["password"] = password
+        socketio.emit("valid_username", True)
+    else:
+        socketio.emit("valid_username", False)
 
 
 if __name__ == "__main__":
