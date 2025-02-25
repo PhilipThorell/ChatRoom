@@ -1,12 +1,19 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_socketio import SocketIO
+import json
 
 
 app = Flask(__name__)
 socketio = SocketIO(app)
 
 
-clients = {}
+with open("database.json", "r") as json_read:
+    database = json.load(json_read)
+
+
+def save_database():
+    with open("database.json", "w") as json_write:
+        json.dump(database, json_write, indent=2)
 
 
 @app.route("/")
@@ -37,8 +44,10 @@ def handle_connect(info):
 
     print(f"Client username: {username}")
     print(f"Client password: {password}")
-    if username not in clients:
-        clients[username] = {"password": password}
+
+    if username not in database:
+        database[username] = {"password": password}
+        save_database()
         socketio.emit("valid_username", {"valid": True, "redirect": "/chat"})
         return redirect(url_for("chat_room"))
     else:
