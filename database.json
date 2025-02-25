@@ -2,10 +2,17 @@
   "users": {
     "warwick": {
       "password": "gargameel",
-      "friends": ["viego", "elise"]
+      "friends": [
+        "viego",
+        "elise"
+      ]
     },
     "nautilus": {
       "password": "wateereman123",
+      "friends": []
+    },
+    "regen": {
+      "password": "123",
       "friends": []
     }
   },

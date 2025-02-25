@@ -78,7 +78,7 @@ input {
 }
 
 #messageBtn {
-    background-image: url('../Images/send.png');
+    background-image: url('images/send.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
