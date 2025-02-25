@@ -61,8 +61,7 @@ def chat_room():
 
     friends = database["users"][username]["friends"]
 
-    return f"Welcome {username} to the room!"
-    #return render_template("chatroom.html")
+    return render_template("chatroom.html")
 
 
 @socketio.on("add_friend")

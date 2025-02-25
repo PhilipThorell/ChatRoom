@@ -11,6 +11,11 @@ socket.on("sent_message", function(data) {
     messages = data
 });
 
-document.getElementById("").addEventListener("click", function () {
+document.getElementById("friendBtn").addEventListener("click", function () {
 
+});
+
+document.getElementById("messageBtn").addEventListener("click", function () {
+    let message = document.getElementById("message").value;
+    socket.emit("message", message);
 });
