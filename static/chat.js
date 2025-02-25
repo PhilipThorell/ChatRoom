@@ -20,7 +20,7 @@ document.getElementById("messageBtn").addEventListener("click", function (event)
     const messageInput = document.getElementById("message").value.trim();
 
     if (messageInput) {
-        console.log("Message sent:", messageInput);
+        console.log(messageInput);
         document.getElementById("message").value = ""; // Clear input
     } else {
         alert("Please enter a message!");
