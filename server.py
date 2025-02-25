@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_socketio import SocketIO
 import json
 
 
 app = Flask(__name__)
+app.secret_key = "your_secret_key"
 socketio = SocketIO(app)
 
 
@@ -21,15 +22,30 @@ def reroute():
     return redirect(url_for("login_page"))
 
 
-@app.route("/login")
+@app.route("/login", methods=["GET", "POST"])
 def login_page():
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        # Store the username and room in the session
+        session["username"] = username
+        session["password"] = password
+
+        print(f"Client username: {username}")
+        print(f"Client password: {password}")
+
+        if username not in database["users"]:
+            database["users"][username] = {"password": password, "friends": []}
+            save_database()
+            return redirect(url_for("chat_room"))
+        else:
+            if password == database["users"][username]["password"]:
+                return redirect(url_for("chat_room"))
+            else:
+                socketio.emit("invalid_password")
+
     return render_template("login.html")
-
-
-@app.route("/chat")
-def chat_room():
-    #return render_template("chatroom.html")
-    return "Welcome to the ChatRoom"
 
 
 @socketio.on("connect")
@@ -37,21 +53,28 @@ def handle_connect():
     print(f"Client: {request.sid} connected!")
 
 
-@socketio.on("clientInfo")
-def handle_connect(info):
-    username = info["name"]
-    password = info["pass"]
+@app.route("/chat", methods=["GET", "POST"])
+def chat_room():
+    username = session.get('username')
+    if not username:
+        return redirect(url_for("login_page"))
 
-    print(f"Client username: {username}")
-    print(f"Client password: {password}")
+    friends = database["users"][username]["friends"]
 
-    if username not in database:
-        database[username] = {"password": password}
-        save_database()
-        socketio.emit("valid_username", {"valid": True, "redirect": "/chat"})
-        return redirect(url_for("chat_room"))
-    else:
-        socketio.emit("valid_username", {"valid": False})
+    return f"Welcome {username} to the room!"
+    #return render_template("chatroom.html")
+
+
+@socketio.on("add_friend")
+def handle_friend(data):
+    database["users"][data.username]["friends"].append(data.friend)
+    socketio.emit("added_friend", database["users"][data.username]["friends"])
+
+
+@socketio.on("message")
+def handle_message(data):
+    database["chatrooms"] = {"users": [data.user1, data.user2], "messages": []}
+    socketio.emit("sent_message", database["chatrooms"]["messages"])
 
 
 if __name__ == "__main__":

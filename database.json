@@ -1,6 +1,13 @@
 {
-  "jager": {
-    "password": "supersecretpass123"
+  "users": {
+    "warwick": {
+      "password": "gargameel",
+      "friends": ["viego", "elise"]
+    },
+    "nautilus": {
+      "password": "wateereman123",
+      "friends": []
+    }
   },
   "regenslayer": {
     "password": "hej123"
