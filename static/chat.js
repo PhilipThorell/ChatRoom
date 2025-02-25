@@ -15,7 +15,16 @@ document.getElementById("friendBtn").addEventListener("click", function () {
 
 });
 
-document.getElementById("messageBtn").addEventListener("click", function () {
-    let message = document.getElementById("message").value;
-    socket.emit("message", message);
+document.getElementById("messageBtn").addEventListener("click", function (event) {
+    event.preventDefault(); // Prevent form submission
+    const messageInput = document.getElementById("message").value.trim();
+
+    if (messageInput) {
+        console.log(messageInput);
+        document.getElementById("message").value = ""; // Clear input
+    } else {
+        alert("Please enter a message!");
+    }
+
+    socket.emit("message", messageInput);
 });
