@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Title</title>
+  <link rel="stylesheet" href="../static/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.2/socket.io.min.js"></script>
 </head>
+
 <body>
 
+  <div class="container">
+    <h1>Login</h1>
+    <form action="">
+      <label for="username">
+        Username:
+      </label>
+      <input type="text" name="username" id="username" placeholder="Enter your username" required>
+      <label for="password">
+        Password:
+      </label>
+      <input type="password" name="password" id="password" placeholder="Enter your password" required>
+      <div class="wrap">
+        <button id="submitBtn" type="submit">Submit</button>
+      </div>
+
+  </div>
+
+  <footer>
+    <h1>test</h1>
+  </footer>
+
+  <script src="../static/login_script.js"></script>
+
 </body>
+
 </html>
