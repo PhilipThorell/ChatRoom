@@ -105,6 +105,7 @@ form {
 
 input {
     transition: box-shadow 0.2s ease-in-out;
+    color: #d5d5d5;
 }
 
 input:hover {
