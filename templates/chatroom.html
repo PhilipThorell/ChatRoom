@@ -12,13 +12,13 @@
 <body>
 
     <div class="wrapper">
-        <div class="friendList">
+        <div class="friendList" id="friendsList">
             <div class="friendBar">
                 <input type="text" name="searchbar" id="searchbar">
                 <button id="friendBtn">Add Friend</button>
             </div>
         </div>
-        <div class="showBox">
+        <div class="showBox" id="showBox"> <!--jag la till id på denna för att testa så att sms syns-->
             <div class="messageBox">
                 <form id="messageForm">
                     <input type="text" name="message" id="message" placeholder="Send message..">
@@ -30,7 +30,7 @@
     </div>
     <script>
         const username = "{{ username }}";
-        friends = {{ friends }};
+        let friends = {{ friends | tojson }};
     </script>
     <script src="../static/chat.js"></script>
 

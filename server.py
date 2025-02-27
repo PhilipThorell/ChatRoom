@@ -24,6 +24,8 @@ def reroute():
 
 @app.route("/login", methods=["GET", "POST"])
 def login_page():
+    error = None
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -43,14 +45,14 @@ def login_page():
             if password == database["users"][username]["password"]:
                 return redirect(url_for("chat_room"))
             else:
-                socketio.emit("invalid_password")
+                error = "Invalid password try again"
 
-    return render_template("login.html")
+    return render_template("login.html", error=error)
 
 
 @socketio.on("connect")
 def handle_connect():
-    print(f"Client: {request.sid} connected!")
+    print(f"Client: {request.sid} connected to chat!")
 
 
 @app.route("/chat", methods=["GET", "POST"])
@@ -74,11 +76,23 @@ def handle_friend(data):
     socketio.emit("added_friend", database["users"][data["username"]]["friends"])
 
 
+@socketio.on("open_chat")
+def show_chat(friend):
+    user = session.get("username")
+    for chat in database["chatrooms"]:
+        if user in chat and friend in chat:
+            messages = database["chatrooms"][f"{friend} {user}"]
+            break
+    else:
+        database["chatrooms"][f"{friend} {user}"] = []
+        messages = []
+    socketio.emit("show_chat", {"messages": messages, "friend": friend})
+
+
 @socketio.on("message")
 def handle_message(data):
-    database["chatrooms"] = {"users": [data["user1"], data["user2"]], "messages": []}
     save_database()
-    socketio.emit("sent_message", database["chatrooms"]["messages"])
+    socketio.emit("sent_message", 0)
 
 
 if __name__ == "__main__":

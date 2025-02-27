@@ -28,6 +28,30 @@
         "hej",
         "warwick"
       ]
+    },
+    "dwa": {
+      "password": "dawda",
+      "friends": []
+    },
+    "23423": {
+      "password": "dawdawd",
+      "friends": []
+    },
+    "dawdawd": {
+      "password": "234234",
+      "friends": []
+    },
+    "345345": {
+      "password": "awd",
+      "friends": []
     }
+  },
+  "chatrooms": {
+    "elise warwick": [
+      {"elise": "hey"},
+      {"elise": "helloo"},
+      {"warwick": "yes"}
+    ],
+    "viego warwick": []
   }
 }
