@@ -8,10 +8,13 @@ socket.on("added_friend", function(friends) {
 socket.on("show_chat", function(message_data) {
     messages = message_data.messages;
     friend = message_data.friend;
-    display_messages(messages);
+    user = message_data.user;
+    display_messages(messages, user);
 });
-socket.on("update_chat", function(messages) {
-    display_messages(messages);
+socket.on("update_chat", function(message_data) {
+    messages = message_data.messages;
+    user = message_data.user;
+    display_messages(messages, user);
 });
 
 document.getElementById("friendBtn").addEventListener("click", function () {
@@ -55,16 +58,30 @@ function display_friends(friends) {
         });
     });
 }
-function display_messages(messages) {
+function display_messages(messages, user) {
     const container = document.getElementById("showBox"); // change to messagesBox
     //container.innerHTML = "";  // Clear existing messages
 
     messages.forEach((message, index) => {
         let name = Object.keys(message)[0];
         let text = message[name];
+
+        const pName = document.createElement("p");
+        pName.classList.add("messages");
+        pName.textContent = `${name}`;
+
         const pMessage = document.createElement("p");
-        pMessage.id = `message-${index}`;
-        pMessage.textContent = `${name}: ${text}`;
+        pMessage.classList.add("messages");
+        pMessage.textContent = `${text}`;
+
+        if (name === user) {
+            pName.id = `username`;
+            pMessage.id = `userMsg`;
+        } else {
+            pName.id = `receiver`;
+            pMessage.id = `receiverMsg`;
+        }
+        container.appendChild(pName);
         container.appendChild(pMessage);
     });
 }
