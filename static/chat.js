@@ -55,6 +55,7 @@ function display_friends(friends) {
         button.className = "selectFriend";
         button.textContent = friend; // Set its text content to the item
         container.appendChild(button); // Append it to the container
+        container.appendChild(document.createElement("br"));
 
         button.addEventListener("click", function() {
             activeFriend = friend;
@@ -69,6 +70,9 @@ function display_messages(messages, user) {
     messages.forEach((message, index) => {
         let name = Object.keys(message)[0];
         let text = message[name];
+
+        const messageDiv = document.createElement("div");
+        messageDiv.className = "message-container";
 
         const pName = document.createElement("p");
         pName.className = "messages";
@@ -87,8 +91,11 @@ function display_messages(messages, user) {
         }
         container.appendChild(pName);
         container.appendChild(pMessage);
-        container.appendChild(document.createElement("br"));
+        container.appendChild(messageDiv);
     });
+
+    container.scrollTop = container.scrollHeight;
 }
+
 
 display_friends(friends);

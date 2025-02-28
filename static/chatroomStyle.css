@@ -145,9 +145,13 @@ form {
 
 
 .displayMessages {
-    
-    
+    max-width: 100%;
+    max-height: fit-content;
+    overflow-y: auto;
     margin-left: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;    
 }
 
 #username {
@@ -167,8 +171,44 @@ form {
     color: #cbcfd2;
 }
 
+.message-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: fit-content;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+}
+
 .messages {
     font-size: large;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    height: 5px;
+    max-width: 90%;
+    white-space: normal;
+
+}
+
+.selectFriend {
+    text-transform: capitalize;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    margin-top: 10px;
+    padding: 10px 25px;
+    width: 120px;
+    font-size: medium;
+    border-radius: 15px;
+    border: none;
+    background-color: transparent;
+    color: #ffffffe3;
+    box-shadow: 0 0 5px #349376;
+}
+
+.selectFriend:hover {
+    background-color: #2a7861;
 }
