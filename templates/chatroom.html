@@ -34,8 +34,8 @@ som knappar men ändå går att klicka på om du förstår vad jag menar (som i 
     </div>
     <script>
         const username = "{{ username }}";
-        let friends = {{ friends | tojson | safe }};
-        
+        friends = {{ friends | tojson }};
+        //tesst
     </script>
     <script src="../static/chat.js"></script>
 
