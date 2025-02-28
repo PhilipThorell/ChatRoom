@@ -50,19 +50,32 @@
       "friends": [
         "warwick",
         "nida",
-        "yasuo"
+        "yasuo",
+        "cornelis"
       ]
     },
     "nida": {
       "password": "123",
       "friends": [
-        "elise"
+        "elise",
+        "yasuo",
+        "cornelis"
       ]
     },
     "yasuo": {
       "password": "hej",
       "friends": [
-        "elise"
+        "elise",
+        "nida",
+        "cornelis"
+      ]
+    },
+    "cornelis": {
+      "password": "vreeswijk",
+      "friends": [
+        "elise",
+        "yasuo",
+        "nida"
       ]
     }
   },
@@ -114,6 +127,21 @@
     "elise yasuo": [
       {
         "yasuo": "hej"
+      }
+    ],
+    "nida yasuo": [
+      {
+        "yasuo": "erer"
+      }
+    ],
+    "nida cornelis": [
+      {
+        "cornelis": "hej nida"
+      }
+    ],
+    "yasuo cornelis": [
+      {
+        "cornelis": "hej yasuo"
       }
     ]
   }
