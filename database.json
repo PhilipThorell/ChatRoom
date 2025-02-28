@@ -32,6 +32,14 @@
     "testing": {
       "password": "test",
       "friends": []
+    },
+    "regenslayer9000": {
+      "password": "hejdu",
+      "friends": [
+        "sad",
+        "aswewe",
+        "test"
+      ]
     }
   }
 }
