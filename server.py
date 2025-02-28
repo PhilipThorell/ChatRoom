@@ -112,7 +112,7 @@ def show_chat(friend):
 
     if username in connected_clients:
         socketio.emit("show_chat",
-                      {"messages": messages, "friend": friend},
+                      {"messages": messages, "friend": friend, "user": username},
                       room=connected_clients[username])
 
 
@@ -136,7 +136,8 @@ def handle_message(data):
             socketio.emit("update_chat", messages,
                           room=connected_clients[username])
         if friend in connected_clients and client_cur_chat[friend] == username:
-            socketio.emit("update_chat", messages,
+            socketio.emit("update_chat",
+                          {"messages": messages, "user": username},
                           room=connected_clients[friend])
 
 
