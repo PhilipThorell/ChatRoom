@@ -49,11 +49,18 @@
       "password": "123",
       "friends": [
         "warwick",
-        "nida"
+        "nida",
+        "yasuo"
       ]
     },
     "nida": {
       "password": "123",
+      "friends": [
+        "elise"
+      ]
+    },
+    "yasuo": {
+      "password": "hej",
       "friends": [
         "elise"
       ]
@@ -102,6 +109,11 @@
       },
       {
         "nida": "LOOOL"
+      }
+    ],
+    "elise yasuo": [
+      {
+        "yasuo": "hej"
       }
     ]
   }
