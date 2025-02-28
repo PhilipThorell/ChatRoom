@@ -16,6 +16,10 @@ socket.on("update_chat", function(message_data) {
     user = message_data.user;
     display_messages(messages, user);
 });
+socket.on("update_users_status", function(online_clients_list) {
+    online_clients = online_clients_list;
+    console.log(online_clients);
+});
 
 document.getElementById("friendBtn").addEventListener("click", function () {
     const friendName = document.getElementById("searchbar").value;
@@ -48,7 +52,7 @@ function display_friends(friends) {
     // Loop through the list and add each item as a new paragraph
     friends.forEach((friend, index) => {
         const button = document.createElement("button"); // Create a new <button> element
-        button.id = "friend-btn-${index}"
+        button.className = "selectFriend";
         button.textContent = friend; // Set its text content to the item
         container.appendChild(button); // Append it to the container
 
@@ -60,7 +64,7 @@ function display_friends(friends) {
 }
 function display_messages(messages, user) {
     const container = document.getElementById("displayMessages");
-    //container.innerHTML = "";  // Clear existing messages
+    container.innerHTML = "";  // Clear existing messages
 
     messages.forEach((message, index) => {
         let name = Object.keys(message)[0];
