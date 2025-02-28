@@ -132,7 +132,6 @@ def handle_message(data):
     save_database()
 
     if messages:
-        print(messages)
         if username in connected_clients:
             socketio.emit("update_chat", messages,
                           room=connected_clients[username])
@@ -141,5 +140,5 @@ def handle_message(data):
                           room=connected_clients[friend])
 
 
-if __name__ == "__main__":  # test
+if __name__ == "__main__":
     socketio.run(app, host="0.0.0.0", port=5000, debug=True, allow_unsafe_werkzeug=True)
