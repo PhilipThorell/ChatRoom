@@ -40,6 +40,10 @@
         "aswewe",
         "test"
       ]
+    },
+    "yasuo": {
+      "password": "hej",
+      "friends": []
     }
   }
 }
