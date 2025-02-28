@@ -7,6 +7,9 @@ app = Flask(__name__)
 app.secret_key = "your_secret_key"
 socketio = SocketIO(app)
 
+connected_clients = {}
+client_cur_chat = {}
+
 
 with open("database.json", "r") as json_read:
     database = json.load(json_read)
@@ -24,6 +27,8 @@ def reroute():
 
 @app.route("/login", methods=["GET", "POST"])
 def login_page():
+    error = None
+
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -43,14 +48,9 @@ def login_page():
             if password == database["users"][username]["password"]:
                 return redirect(url_for("chat_room"))
             else:
-                socketio.emit("invalid_password")
+                error = "Invalid password try again"
 
-    return render_template("login.html")
-
-
-@socketio.on("connect")
-def handle_connect():
-    print(f"Client: {request.sid} connected!")
+    return render_template("login.html", error=error)
 
 
 @app.route("/chat", methods=["GET", "POST"])
@@ -67,18 +67,78 @@ def chat_room():
                            friends=friends)
 
 
+@socketio.on("connect")
+def handle_connect():
+    username = session.get("username")
+    if username:
+        connected_clients[username] = request.sid
+        print(f"Client: {username} connected to chat with SID: {request.sid}")
+
+
 @socketio.on("add_friend")
 def handle_friend(data):
-    database["users"][data["username"]]["friends"].append(data["friend"])
-    save_database()
-    socketio.emit("added_friend", database["users"][data["username"]]["friends"])
+    username = data["username"]
+    friend = data["friend"]
+
+    if friend in database["users"]:
+        if friend in database["users"][username]["friends"]:
+            return
+        database["users"][username]["friends"].append(friend)
+        database["users"][friend]["friends"].append(username)
+        save_database()
+
+        if username in connected_clients:
+            socketio.emit("added_friend",
+                          database["users"][username]["friends"],
+                          room=connected_clients[username])
+        if friend in connected_clients:
+            socketio.emit("added_friend",
+                          database["users"][friend]["friends"],
+                          room=connected_clients[friend])
+
+
+@socketio.on("open_chat")
+def show_chat(friend):
+    username = session.get("username")
+    client_cur_chat[username] = friend
+
+    for chat in database["chatrooms"]:
+        if username in chat and friend in chat:
+            messages = database["chatrooms"][chat]
+            break
+    else:
+        database["chatrooms"][f"{friend} {username}"] = []
+        messages = []
+
+    if username in connected_clients:
+        socketio.emit("show_chat",
+                      {"messages": messages, "friend": friend},
+                      room=connected_clients[username])
 
 
 @socketio.on("message")
 def handle_message(data):
-    database["chatrooms"] = {"users": [data["user1"], data["user2"]], "messages": []}
+    msg = data["msg"]
+    friend = data["friend"]
+    username = session.get("username")
+    messages = None
+
+    for chat in database["chatrooms"]:
+        if username in chat and friend in chat:
+            database["chatrooms"][chat].append({username: msg})
+            messages = database["chatrooms"][chat]
+            break
+
     save_database()
-    socketio.emit("sent_message", database["chatrooms"]["messages"])
+
+    if messages:
+        print(messages)
+        if username in connected_clients:
+            socketio.emit("update_chat", messages,
+                          room=connected_clients[username])
+        if friend in connected_clients and client_cur_chat[friend] == username:
+            socketio.emit("update_chat", messages,
+                          room=connected_clients[friend])
 
 
 if __name__ == "__main__":
