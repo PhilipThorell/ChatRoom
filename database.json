@@ -44,14 +44,65 @@
     "345345": {
       "password": "awd",
       "friends": []
+    },
+    "elise": {
+      "password": "123",
+      "friends": [
+        "warwick",
+        "nida"
+      ]
+    },
+    "nida": {
+      "password": "123",
+      "friends": [
+        "elise"
+      ]
     }
   },
   "chatrooms": {
     "elise warwick": [
-      {"elise": "hey"},
-      {"elise": "helloo"},
-      {"warwick": "yes"}
+      {
+        "elise": "hey"
+      },
+      {
+        "elise": "helloo"
+      },
+      {
+        "warwick": "yes"
+      },
+      {
+        "warwick": "123"
+      },
+      {
+        "warwick": "r56uydfy"
+      },
+      {
+        "warwick": "ooops"
+      },
+      {
+        "warwick": "ok"
+      },
+      {
+        "elise": "xaxaxaa"
+      },
+      {
+        "warwick": "rtrtrt"
+      }
     ],
-    "viego warwick": []
+    "viego warwick": [],
+    "elise nida": [
+      {
+        "nida": "hj"
+      },
+      {
+        "nida": "okokok"
+      },
+      {
+        "elise": "???yese"
+      },
+      {
+        "nida": "LOOOL"
+      }
+    ]
   }
 }
