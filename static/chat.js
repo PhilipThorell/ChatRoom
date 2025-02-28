@@ -69,4 +69,4 @@ function display_messages(messages) {
     });
 }
 
-display_friends(friends);
+display_friends(friends); // teest
