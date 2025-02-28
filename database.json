@@ -28,6 +28,10 @@
         "hej",
         "warwick"
       ]
+    },
+    "testing": {
+      "password": "test",
+      "friends": []
     }
   }
 }
