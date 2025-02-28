@@ -52,7 +52,7 @@ function display_friends(friends) {
     // Loop through the list and add each item as a new paragraph
     friends.forEach((friend, index) => {
         const button = document.createElement("button"); // Create a new <button> element
-        button.className = "friendBtn";
+        button.className = "selectFriend";
         button.textContent = friend; // Set its text content to the item
         container.appendChild(button); // Append it to the container
 
