@@ -59,7 +59,7 @@ function display_friends(friends) {
     });
 }
 function display_messages(messages, user) {
-    const container = document.getElementById("showBox"); // change to messagesBox
+    const container = document.getElementById("displayMessages");
     //container.innerHTML = "";  // Clear existing messages
 
     messages.forEach((message, index) => {
