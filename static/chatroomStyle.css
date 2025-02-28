@@ -141,3 +141,22 @@ form {
     outline: none;
     box-shadow: 0 0 5px #349376;
 }
+
+.displayMessages {
+    background-color: #349376;
+    width: 400px;
+    height: 500px;
+    margin-left: 20px;
+}
+
+#username {
+    color: pink;
+}
+
+#userMsg {
+    color: pink;
+}
+
+#receiver {
+    color: blueviolet;
+}
