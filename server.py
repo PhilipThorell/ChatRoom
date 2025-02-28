@@ -8,6 +8,7 @@ app.secret_key = "your_secret_key"
 socketio = SocketIO(app)
 
 connected_clients = {}
+online_clients = {}
 client_cur_chat = {}
 
 
@@ -72,7 +73,18 @@ def handle_connect():
     username = session.get("username")
     if username:
         connected_clients[username] = request.sid
+        online_clients[username] = request.sid
         print(f"Client: {username} connected to chat with SID: {request.sid}")
+        socketio.emit("update_users_status", list(online_clients.keys()))
+
+
+@socketio.on("disconnect")
+def handle_connect():
+    username = session.get("username")
+    if username and username in online_clients:
+        del online_clients[username]
+        print(f"Client: {username} disconnected")
+        socketio.emit("update_users_status", list(online_clients.keys()))
 
 
 @socketio.on("add_friend")
