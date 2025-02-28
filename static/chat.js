@@ -67,19 +67,19 @@ function display_messages(messages, user) {
         let text = message[name];
 
         const pName = document.createElement("p");
-        pName.classList.add("messages");
+        pName.className = "messages";
         pName.textContent = `${name}`;
 
         const pMessage = document.createElement("p");
-        pMessage.classList.add("messages");
+        pMessage.className = "messages";
         pMessage.textContent = `${text}`;
 
         if (name === user) {
-            pName.id = `username`;
-            pMessage.id = `userMsg`;
+            pName.id = "username";
+            pMessage.id = "userMsg";
         } else {
-            pName.id = `receiver`;
-            pMessage.id = `receiverMsg`;
+            pName.id = "receiver";
+            pMessage.id = "receiverMsg";
         }
         container.appendChild(pName);
         container.appendChild(pMessage);
