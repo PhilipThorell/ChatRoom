@@ -83,6 +83,7 @@ function display_messages(messages, user) {
         }
         container.appendChild(pName);
         container.appendChild(pMessage);
+        container.appendChild(document.createElement("br"));
     });
 }
 
