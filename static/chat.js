@@ -18,7 +18,6 @@ socket.on("update_chat", function(message_data) {
 });
 socket.on("update_users_status", function(online_clients_list) {
     online_clients = online_clients_list;
-    console.log(online_clients);
 });
 
 document.getElementById("friendBtn").addEventListener("click", function () {
@@ -46,15 +45,14 @@ document.getElementById("messageBtn").addEventListener("click", function () {
 });
 
 function display_friends(friends) {
-    // Get the container element
     const container = document.getElementById("friendsList");
 
     // Loop through the list and add each item as a new paragraph
     friends.forEach((friend, index) => {
         const button = document.createElement("button"); // Create a new <button> element
         button.className = "selectFriend";
-        button.textContent = friend; // Set its text content to the item
-        container.appendChild(button); // Append it to the container
+        button.textContent = friend;
+        container.appendChild(button);
         container.appendChild(document.createElement("br"));
 
         button.addEventListener("click", function() {
@@ -62,6 +60,9 @@ function display_friends(friends) {
             socket.emit("open_chat", friend);
         });
     });
+
+    // Auto-scroll to the bottom
+    container.scrollTop = container.scrollHeight;
 }
 function display_messages(messages, user) {
     const container = document.getElementById("displayMessages");

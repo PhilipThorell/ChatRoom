@@ -145,7 +145,7 @@ def handle_message(data):
 
     if messages:
         if username in connected_clients:
-            socketio.emit("update_chat", messages,
+            socketio.emit("update_chat", {"messages": messages},
                           room=connected_clients[username])
         if friend in connected_clients and client_cur_chat[friend] == username:
             socketio.emit("update_chat",

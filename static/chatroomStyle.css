@@ -154,6 +154,15 @@ form {
     white-space: normal;    
 }
 
+#displayMessages {
+    max-height: 400px; /* Adjust this height as needed */
+    overflow-y: auto; /* Enables vertical scrolling */
+    border: 1px solid #ccc; /* Optional: Just to see the boundary */
+    padding: 10px;
+    display: flex;
+    flex-direction: column; /* Ensures messages stack properly */
+}
+
 #username {
     font-weight: bolder;
     color: #edeef0;
