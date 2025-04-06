@@ -1,4 +1,5 @@
 let activeFriend = "";
+online_clients = [];
 
 var socket = io.connect(location.protocol + '//' + document.domain + ':' + location.port);
 
@@ -18,6 +19,7 @@ socket.on("update_chat", function(message_data) {
 });
 socket.on("update_users_status", function(online_clients_list) {
     online_clients = online_clients_list;
+    display_friends(friends);
 });
 
 document.getElementById("friendBtn").addEventListener("click", function () {
@@ -44,21 +46,50 @@ document.getElementById("messageBtn").addEventListener("click", function () {
     }
 });
 
+const container = document.getElementById("friendsColumn");
 function display_friends(friends) {
-    const container = document.getElementById("friendsList");
-
+    container.innerHTML = "";
     // Loop through the list and add each item as a new paragraph
     friends.forEach((friend, index) => {
+        const friend_wrapper = document.createElement("div");
+        friend_wrapper.style.display = "flex";
+        friend_wrapper.style.alignItems = "center";
+        friend_wrapper.style.marginBottom = "10px";
+        friend_wrapper.style.gap = "8px";
+
         const button = document.createElement("button"); // Create a new <button> element
         button.className = "selectFriend";
         button.textContent = friend;
-        container.appendChild(button);
-        container.appendChild(document.createElement("br"));
 
         button.addEventListener("click", function() {
             activeFriend = friend;
             socket.emit("open_chat", friend);
         });
+
+        const dot = document.createElement('span');
+        dot.classList.add('dot');
+
+        // Choose color based on online status
+        const isOnline = online_clients.includes(friend);
+        const status_color = isOnline ? "green" : "lightgrey";
+
+
+        const canvas = document.createElement("canvas");
+        canvas.width = 20;
+        canvas.height = 20;
+        const ctx = canvas.getContext('2d');
+
+        // Draw a circle
+        ctx.beginPath();
+        ctx.arc(10, 10, 6, 0, Math.PI * 2); // x, y, radius
+        ctx.fillStyle = status_color; // Circle color
+        ctx.fill();
+
+        friend_wrapper.appendChild(canvas);
+        friend_wrapper.appendChild(button);
+
+        container.appendChild(friend_wrapper);
+        container.appendChild(document.createElement("br"));
     });
 
     // Auto-scroll to the bottom
